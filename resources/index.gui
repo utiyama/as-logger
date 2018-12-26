@@ -1,0 +1,32 @@
+<svg>
+  <svg id="runningPage">
+    <rect id="background2" pointer-events="none" />
+    <text id="accel-label" class="sensor-label" x="50%" y="30">accelerometer</text>
+    <text id="accel-data" class="sensor-data" x="50%" y="50">{ ... }</text>
+    <text id="gyro-label" class="sensor-label" x="50%" y="75">gyroscope</text>
+    <text id="gyro-data" class="sensor-data" x="50%" y="95">{ ... }</text> 
+    <defs>
+      <symbol id="custom-textarea" type="dynamic-textarea" system-events="all">
+        <textarea id="text" fill="white" x="0" y="110" width="100%" font-size="25" />
+        <rect x="0" y="$+15" width="100%" height="2" fill="fb-cyan" />
+      </symbol>
+    </defs>
+
+    <use id="custom" href="#custom-textarea" x="10" y="10" width="100%-20">
+      <set href="text" attributeName="text-buffer" to="Press Up-Right button to start recording                                                                                                                                                                 " />
+    </use>
+  </svg>
+  
+ <svg id="exitPage">
+   <text y="110" x="50%" id="Title" font-family="System-Regular" fill="yellow" font-size="30" font-weight="bold" text-anchor="middle">Exit: Are you sure?</text> 
+   <svg y="$">
+     <use id="btn-yes" href="#square-button-toggle" x="50%" fill="fb-green">
+       <set href="#text" attributeName="text-buffer" to="Yes" />
+     </use>
+     <use id="btn-no" href="#square-button-toggle" value="1" fill="fb-red">
+       <set href="#text" attributeName="text-buffer" to="No" />
+     </use>
+   </svg>
+ </svg>
+</svg>
+
