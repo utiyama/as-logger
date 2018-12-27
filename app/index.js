@@ -56,6 +56,28 @@ var dtSeconds = new Uint8Array(data_sample, 50, 1);// 1 x 1 bytes
 var dtMins = new Uint8Array(data_sample, 51, 1);// 1 x 1 bytes
 var dtHours = new Uint8Array(data_sample, 52, 1);// 1 x 1 bytes
 
+function sendAllFiles(){
+  let listDir = fs.listDirSync("/private/data");
+  let dirIter;
+  while((dirIter = listDir.next()) && !dirIter.done) {
+    let stats = fs.statSync(dirIter.value);
+    if (stats) {
+      console.log("send " + dirIter.value + "File size: " + stats.size + " bytes, Last modified: " + stats.mtime);
+      let filepath = "/private/data/" + dirIter.value;
+      outbox
+      .enqueueFile(filepath)
+      .then((ft) => {
+        console.log(`Transfer of ${ft.name} successfully queued.`);
+      })
+      .catch((error) => {
+        console.log(`Failed to schedule transfer: ${error}`);
+      })
+    }
+  }
+}
+
+sendAllFiles();
+
 function recordingHandler(){
   if (recording) {
     recording = false;
