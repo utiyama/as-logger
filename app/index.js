@@ -5,6 +5,9 @@ import * as fs from "fs";
 import { listDirSync } from "fs";
 import { me } from "appbit";
 import { outbox } from "file-transfer";
+import { display } from "display";
+display.autoOff = false;
+display.on = true;
 
 const accel = new Accelerometer();
 const gyro = new Gyroscope();
@@ -76,7 +79,7 @@ function sendAllFiles(){
   }
 }
 
-sendAllFiles();
+//sendAllFiles();
 
 function recordingHandler(){
   if (recording) {
@@ -160,6 +163,7 @@ function append(filename) {
 }
 
 function refreshData() {
+  //display.poke();
   let timestamp = new Date;
 
   dtHours[0] = timestamp.getHours();
