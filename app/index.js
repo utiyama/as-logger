@@ -69,6 +69,7 @@ function sendLastFile(){
   }
   let stats = fs.statSync(sendFileName);
   if (stats) {
+    customText.text = "Enqueued data... File size: " + stats.size +  " bytes, Last modified: " + stats.mtime;
     console.log("Enqueue " + sendFileName + ", File size: " + stats.size + " bytes, Last modified: " + stats.mtime);
     let filepath = "/private/data/" + sendFileName;
     outbox
