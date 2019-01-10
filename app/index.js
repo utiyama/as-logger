@@ -59,6 +59,29 @@ var dtSeconds = new Uint8Array(data_sample, 50, 1);// 1 x 1 bytes
 var dtMins = new Uint8Array(data_sample, 51, 1);// 1 x 1 bytes
 var dtHours = new Uint8Array(data_sample, 52, 1);// 1 x 1 bytes
 
+function sendLastFile(){
+  let listDir = fs.listDirSync("/private/data");
+  let dirIter = listDir.next();
+  let sendFileName;
+  while(!dirIter.done){
+    sendFileName = dirIter.value;
+    dirIter = listDir.next();
+  }
+  let stats = fs.statSync(sendFileName);
+  if (stats) {
+    console.log("Enqueue " + sendFileName + ", File size: " + stats.size + " bytes, Last modified: " + stats.mtime);
+    let filepath = "/private/data/" + sendFileName;
+    outbox
+    .enqueueFile(filepath)
+    .then((ft) => {
+      console.log(`Transfer of ${ft.name} successfully queued.`);
+    })
+    .catch((error) => {
+      console.log(`Failed to schedule transfer: ${error}`);
+    })
+  }
+}
+
 function sendAllFiles(){
   let listDir = fs.listDirSync("/private/data");
   let dirIter;
@@ -112,10 +135,12 @@ var last_chunk_bytes;
 
 function messageHandler(){
   //recFilename = "RawDataLogger-20181227-132407.txt";// 特定のファイルを指定して吸い出す場合はここで指定する
-  if(sending){
-    sending = false;
-  } else {
-    sending = true;
+//  if(sending){
+//    sending = false;
+//  } else {
+//    sending = true;
+    sendLastFile();
+/*
     customText.text = "Enqueued data...";
     let filepath = "/private/data/" + recFilename;
     outbox
@@ -126,7 +151,8 @@ function messageHandler(){
       .catch((error) => {
       console.log(`Failed to schedule transfer: ${error}`);
     })
-  } 
+*/
+//  } 
 }
 
 runningPage.style.display="inline";
