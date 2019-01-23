@@ -2,12 +2,17 @@ import { Accelerometer } from "accelerometer";
 import document from "document";
 import { Gyroscope } from "gyroscope";
 import * as fs from "fs";
-import { listDirSync } from "fs";
+//import { listDirSync } from "fs";
 import { me } from "appbit";
 import { outbox } from "file-transfer";
-import { display } from "display";
+//import { display } from "display";
+
+me.appTimeoutEnabled = false; // Disable timeout
+
+/*
 display.autoOff = false;
 display.on = true;
+*/
 
 const accel = new Accelerometer();
 const gyro = new Gyroscope();
@@ -191,7 +196,7 @@ function append(filename) {
 
 function refreshData() {
   //display.on = true;
-  display.poke();
+  //display.poke();
   let timestamp = new Date;
 
   dtHours[0] = timestamp.getHours();
