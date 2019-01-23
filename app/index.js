@@ -190,7 +190,8 @@ function append(filename) {
 }
 
 function refreshData() {
-  //display.poke();
+  //display.on = true;
+  display.poke();
   let timestamp = new Date;
 
   dtHours[0] = timestamp.getHours();
