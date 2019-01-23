@@ -8,7 +8,7 @@
     "@fitbit/sdk-cli": "^1.5.0"
   },
   "fitbit": {
-    "appUUID": "85b3d3b9-e544-4391-aa8f-39b52b6e0000",
+    "appUUID": "85b3d3b9-e544-4391-aa8f-39b52b6e0001",
     "appType": "app",
     "appDisplayName": "As Logger0001",
     "iconFile": "resources/icon.png",
